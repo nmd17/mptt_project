@@ -21,9 +21,13 @@ class AddFileForm(forms.ModelForm):
          try:
             self.query = File.objects.get(name=self.user).get_descendants(include_self=True)
             self.fields['parent'].queryset = self.query
+            self.fields['parent'].required = True
+
          except:
              del self.fields['parent']
+             self.fields['name'].widget = forms.TextInput(attrs={'placeholder': self.user})
              self.fields['name'].disabled = True
+             
          
     name = forms.CharField(max_length=75)
     parent = TreeNodeChoiceField(queryset=File.objects.all(), required=False)

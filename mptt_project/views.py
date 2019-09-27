@@ -17,7 +17,7 @@ def add_files(request):
 
             return HttpResponseRedirect('/files/')
     else:
-        form = AddFileForm(initial={"name": request.user.username}, user=request.user)
+        form = AddFileForm(user=request.user)
 
     return render(request, "file_form.html", {'form': form})
 
