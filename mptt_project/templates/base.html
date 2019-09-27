@@ -1,0 +1,39 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nav bar</title>
+</head>
+<body style="padding-top: 80px;">
+        <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #e3f2fd;">  
+          <a class="navbar-brand" href="/">Trees Everywhere</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+              {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Sign out</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+    
+        <main role="main" class="container">
+          {% block main %}
+          {% endblock %}
+        </main>
+</body>
+</html>

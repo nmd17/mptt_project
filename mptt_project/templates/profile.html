@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+
+{% block main %}
+
+<a href="/add_files/">Click to add a new file</a>
+
+{% load mptt_tags %}
+{%if files != '' %}
+<ul>
+    {% recursetree files %}
+        <li>
+            {{ node.name }}
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+{% else %}
+<div>
+    You have not created a tree yet!
+</div>
+{% endif %}
+
+{% endblock %}
