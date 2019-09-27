@@ -22,7 +22,6 @@ class AddFileForm(forms.ModelForm):
             self.query = File.objects.get(name=self.user).get_descendants(include_self=True)
             self.fields['parent'].queryset = self.query
             self.fields['parent'].required = True
-
          except:
              del self.fields['parent']
              self.fields['name'].widget = forms.TextInput(attrs={'placeholder': self.user})
