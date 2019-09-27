@@ -1,15 +1,27 @@
-{% load mptt_tags %}
-<ul>
-    {% recursetree files %}
-        <li>
-            {{ node.name }}
-            {% if not node.is_leaf_node %}
-                <ul class="children">
-                    {{ children }}
-                </ul>
-            {% endif %}
-        </li>
-    {% endrecursetree %}
-</ul>
+{% extends 'base.html' %}
 
-<a href="/add_files/">Click to add a new file</a>
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+
+{% block main %}
+    <div style="display: flex; flex-direction: row; justify-content:space-around;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <h2>Sign in</h2>
+                <form class='form' method='post' action='' style="border: 5px solid lightskyblue; padding: 75px; border-radius: 10px;">
+                    {% csrf_token %}
+                    {% bootstrap_form signinform %}
+                    <input type='submit' class='btn btn-primary' value='Sign In'>
+                </form>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+        <h2>Not signed up?</h2>
+            <form class='form' method='post' action='' style="border: 5px solid lightskyblue; padding: 75px; border-radius: 10px;">
+                {% csrf_token %}
+                {% bootstrap_form signupform %}
+                <input value='signupform' name='signupform' hidden>
+                <input type='submit' class="btn btn-primary" value='Sign Up'>
+            </form>  
+        </div> 
+    </div>
+{% endblock %}
